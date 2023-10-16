@@ -46,6 +46,11 @@ Once you have installed it, you should include the <i>.jar</i> file in <i>Librar
 That's all installation you have to do, if you arrive to this point, congratulations, you can keep reading the documentation if you want. In case you had problems in the previous steps, you can contact me or follow any tutorial on YouTube. Good Luck!
 </p>
 
+<h3>SQL Script</h3>
+<p>
+In the main folder, you will find 'library.sql' file, you can execute it in your DBMS or export it using the export function and selecting this file.
+</p>
+
 
 <h3>Files and Folders</h3>
 <p>
