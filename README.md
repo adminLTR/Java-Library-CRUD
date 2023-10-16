@@ -17,7 +17,7 @@ JDK: <a target="_blank" href="https://www.oracle.com/pe/java/technologies/downlo
 JRE: <a target="_blank" href="https://www.java.com/es/download/ie_manual.jsp">https://www.java.com/es/download/ie_manual.jsp</a>
 </p>
 <p>
-JDK 20 and JRE 8 where used to build this app, in case you have any version problem try to download these software versions or instead try to update the version in configuration files
+JDK 20 and JRE 8 were used to build this app, in case you have any version problem try to download these software versions or instead try to update the version in configuration files
 </p>
 
 <h4>NetBeans installation</h4>
