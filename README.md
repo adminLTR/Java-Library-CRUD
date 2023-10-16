@@ -1,3 +1,7 @@
 # Java-Library-CRUD
 Basic CRUD Java library system
-<b>Author: </br>LTprograms
+<p> 
+    <b>Author: </b>LTprograms
+</p>
+
+<img src="./static/app.png"/>
