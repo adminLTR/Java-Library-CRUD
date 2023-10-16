@@ -24,21 +24,24 @@ import javax.swing.table.DefaultTableModel;
 public class Controller {
     private FrmMain view;
     private JConnection connection;
-    private int selectedId = -1;
+    private int selectedId = -1; // if search button is pressed, book's id will be set in this variable in case we want to update book's information
     public Controller(FrmMain v) {
         connection = new JConnection();
         this.view = v;
         fillTable(getBooks());
         
+        // register button
         this.view.registerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // get all input values
                 String name = view.nameField.getText();
                 String desc = view.descriptionTxtArea.getText();
                 String author = view.authorField.getText();
                 int stock = Integer.parseInt(view.stockField.getText());
                 String category = view.categoryField.getText();
                 Book book = new Book(name, author, desc, stock, category);
+                //If registration success, reloads the table and clear all input fields
                 if (register(book) == 1) {
                     JOptionPane.showMessageDialog(view, "Book succesfully registered.");
                     fillTable(getBooks());
@@ -49,9 +52,14 @@ public class Controller {
                 }
             }
         });
+        // search button
         this.view.searchBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                /* 
+                you input an ID and searches in DDBB,
+                in case it's not found, shows an error message, else, fill all inputs with book's information
+                */
                 int id = Integer.parseInt(JOptionPane.showInputDialog(view, "Insert book's ID:"));
                 Book book = getBookByID(id);
                 if (book==null) {
@@ -62,13 +70,18 @@ public class Controller {
                     view.stockField.setText(book.getStock()+"");
                     view.authorField.setText(book.getAuthor());
                     view.categoryField.setText(book.getCategory());
-                    selectedId = id;
+                    selectedId = id; // sets variable value in case we want to update this information
                 }
             }
         });
+        // update button
         this.view.updateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                /*
+                Uses 'selectedId' variable to update this book's information, considering input
+                fields as the new values.
+                */
                 String name = view.nameField.getText();
                 String desc = view.descriptionTxtArea.getText();
                 String author = view.authorField.getText();
@@ -85,9 +98,13 @@ public class Controller {
                 }
             }
         });
+        // delete button
         this.view.deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                /*
+                Just ask for an ID and deletes book's information if found. Shows an error message in other case
+                */
                 int id = Integer.parseInt(JOptionPane.showInputDialog(view, "Insert book's ID:"));
                 if (delete(id) == 1) {
                     JOptionPane.showMessageDialog(view, "Successfully deleted book "+id);
@@ -99,9 +116,11 @@ public class Controller {
                 }
             }
         });
+        // clear button
         this.view.clearBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // clears the screen and reloads table
                 clear();
                 selectedId = -1;
                 fillTable(getBooks());
@@ -113,7 +132,7 @@ public class Controller {
         this.view.setVisible(true);
         view.setLocationRelativeTo(null);
     }
-    
+
     private Book getBookByID(int id) {        
         try {
             Connection con = connection.getConnection();
@@ -135,7 +154,7 @@ public class Controller {
         }
         return null;
     }
-    
+    // get all books
     private LinkedList<Book> getBooks() {
         LinkedList<Book> books = new LinkedList<>();
         try {
